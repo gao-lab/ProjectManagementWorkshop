@@ -1,5 +1,9 @@
 # Project management demo
 
+[![stars-badge](https://img.shields.io/github/stars/gao-lab/ProjectManagementWorkshop?logo=GitHub&color=yellow)](https://github.com/gao-lab/ProjectManagementWorkshop/stargazers)
+[![build-badge](https://github.com/gao-lab/ProjectManagementWorkshop/actions/workflows/test.yaml/badge.svg)](https://github.com/gao-lab/ProjectManagementWorkshop/actions/workflows/test.yaml)
+[![license-badge](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 This is a demo repo for project management in Technology Workshop 2023.
 
 ## Environment management
