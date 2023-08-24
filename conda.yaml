@@ -203,4 +203,9 @@ dependencies:
   - zeromq=4.3.4
   - zipp=3.16.2
   - pip:
-      - mypackage==0.1.0
+      - cattrs==23.1.2
+      - esbonio==0.16.1
+      - lsprotocol==2023.0.0a2
+      - pygls==1.0.2
+      - pyspellchecker==0.7.2
+      - typeguard==3.0.2

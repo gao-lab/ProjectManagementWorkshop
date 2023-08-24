@@ -16,19 +16,26 @@ Then install necessary packages in this environment.
 
 ### Export environment to file
 
-Exporting environment to `conda.yaml` enables git version tracking and syncing across machines:
+Exporting environment to `conda.yaml` enables git version tracking and syncing
+across machines:
 
 ```sh
 mamba env export -p ./conda --no-build > conda.yaml
 ```
 
 > **Note**
-> We may also chooose to remove the `name:` and `prefix:` lines from the exported file to redact the trace of absolute paths:
-> `mamba env export -p ./conda --no-build | grep -Ev '^(name|prefix):' > conda.yaml`
+>
+> We may also choose to remove the `name:` and `prefix:` lines from the exported
+> file to redact the trace of absolute paths, as well as to remove our
+> "mypackage" entry which should be installed as a development version:
+>
+> `mamba env export -p ./conda --no-build | grep -Ev '^name|^prefix|mypackage' >
+> conda.yaml`
 
 ### Clone the environment on another machine
 
-If we wish to use computing resource on another machine, we may clone the repo and rebuild the environment with the `conda.yaml` file.
+If we wish to use computing resource on another machine, we may clone the repo
+and rebuild the environment with the `conda.yaml` file.
 
 ```sh
 mamba env create -p ./conda -f conda.yaml
@@ -36,7 +43,8 @@ mamba env create -p ./conda -f conda.yaml
 
 ### Sync environment change across machines
 
-If we changed the environment on one machine, we may update the `conda.yaml` file, sync it over git, and use it update the environment on another machine.
+If we changed the environment on one machine, we may update the `conda.yaml`
+file, sync it over git, and use it update the environment on another machine.
 
 ```sh
 mamba env update -p ./conda -f conda.yaml --prune
@@ -47,6 +55,34 @@ mamba env update -p ./conda -f conda.yaml --prune
 Use the `pyproject.toml` file to instruct the build and install process.
 
 - In this demo, we are using the build tool `flit`.
-- Use `flit install -s` to install our own package in symlink mode, so changes in our package are immediately effective without reinstalling.
-- To make a formal release of the package, use `flit build` and `twine upload`, or this [github action](https://github.com/pypa/gh-action-pypi-publish).
+- Use `flit install -s` to install our own package in symlink mode, so changes
+  in our package are immediately effective without reinstalling.
+- To make a formal release of the package, use `flit build` and `twine upload`,
+  or this [github action](https://github.com/pypa/gh-action-pypi-publish).
 
+
+## Data preparation
+
+Go to the `data/download` directory, download each dataset as described in their
+README file, and run the preprocessing scripts. These will produce a
+`data/processed` directory containing standardized data files.
+
+## Run evaluation
+
+Go to the `evaluation` directory, and run the following command:
+
+```sh
+snakemake -prk -j4
+```
+
+## Run experiments
+
+Go to the `experiments` subdirectories, and convert percent scripts to Jupyter
+notebooks with the following command:
+
+```sh
+jupytext --to notebook *.py
+```
+
+Then play with the notebooks in Jupyter Lab. They will stay in sync with the
+percent script automatically.

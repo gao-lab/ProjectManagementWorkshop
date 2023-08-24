@@ -3,7 +3,7 @@ build-backend = "flit_core.buildapi"
 requires = ["flit_core >=3.2,<4"]
 
 [project]
-authors = [{ name = "Zhi-Jie Cao", email = "caozj@mail.cbi.pku.edu.cn"  }]
+authors = [{ name = "Zhi-Jie Cao", email = "caozj@mail.cbi.pku.edu.cn" }]
 classifiers = [
   "Intended Audience :: Science/Research",
   "License :: OSI Approved :: MIT License",
@@ -16,16 +16,10 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Topic :: Scientific/Engineering :: Bio-Informatics",
 ]
-dependencies = [
-  "numpy",
-  "pandas",
-  "scikit-learn",
-]
+dependencies = ["numpy", "pandas", "scikit-learn"]
 description = "Project management workshop demo"
-keywords = [
-  "bioinformatics",
-]
-license = { file = "LICENSE"  }
+keywords = ["bioinformatics"]
+license = { file = "LICENSE" }
 name = "mypackage"
 readme = "README.md"
 requires-python = ">=3.9"

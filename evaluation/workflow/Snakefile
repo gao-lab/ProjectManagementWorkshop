@@ -1,8 +1,10 @@
 configfile: "config/config.yaml"
 
+
 rule all:
     input:
-        "results/summary.pdf"
+        "results/summary.pdf",
+
 
 rule plot:
     input:
@@ -10,7 +12,8 @@ rule plot:
     output:
         "results/summary.pdf",
     script:
-        "scripts/plot.py"
+        "scripts/plot.R"
+
 
 rule summarize:
     input:
@@ -24,6 +27,7 @@ rule summarize:
     script:
         "scripts/summarize.py"
 
+
 rule compute_metrics:
     input:
         true="results/{dataset}/test_y.csv",
@@ -33,24 +37,30 @@ rule compute_metrics:
     log:
         "results/{dataset}/{method}/compute_metrics.log",
     shell:
-        "python scripts/compute_metrics.py "
+        "python workflow/scripts/compute_metrics.py "
         "--true {input.true} "
         "--pred {input.pred} "
         "--output {output} "
         "&> {log}"
 
+
 rule random_pred:
     input:
-        "results/{dataset}/train_x.csv",
+        train_x="results/{dataset}/train_x.csv",
+        train_y="results/{dataset}/train_y.csv",
+        test_x="results/{dataset}/test_x.csv",
     output:
         "results/{dataset}/random_pred/test_y.csv",
     log:
         "results/{dataset}/random_pred/run.log",
     shell:
-        "python scripts/random_pred.py "
-        "-i {input} "
-        "-o {output} "
+        "python workflow/scripts/random_pred.py "
+        "--train-x {input.train_x} "
+        "--train-y {input.train_y} "
+        "--test-x {input.test_x} "
+        "--test-y {output} "
         "&> {log}"
+
 
 rule mypackage:
     input:
@@ -69,6 +79,7 @@ rule mypackage:
         "--test-y {output} "
         "&> {log}"
 
+
 rule split_train_test:
     input:
         x="../data/processed/{dataset}/x.csv",
@@ -81,7 +92,7 @@ rule split_train_test:
     log:
         "results/{dataset}/split_train_test.log",
     shell:
-        "python scripts/split_train_test.py "
+        "python workflow/scripts/split_train_test.py "
         "--input-x {input.x} "
         "--input-y {input.y} "
         "--output-train-x {output.train_x} "

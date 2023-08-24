@@ -7,7 +7,7 @@ except ModuleNotFoundError:
         return get_distribution(name).version
 
 
+from .model import fit, predict
+
 name = "mypackage"
 version = version(name)
-
-from .model import fit, predict

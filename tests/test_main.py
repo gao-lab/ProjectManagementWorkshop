@@ -1,5 +1,7 @@
 from subprocess import run
+
 from .fixtures import *
+
 
 def test_main(train_x, train_y, test_x, tmp_path):
     train_x.to_csv(tmp_path / "train_x.csv")

@@ -1,6 +1,11 @@
 /conda/
 /dist/
 __pycache__/
-.coverage
+.ipynb_checkpoints/
+.pytest_cache/
+.snakemake/
+.coverage*
+.DS_Store
 *.pyc
 *.csv
+*.ipynb
