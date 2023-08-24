@@ -1,0 +1,54 @@
+[build-system]
+build-backend = "flit_core.buildapi"
+requires = ["flit_core >=3.2,<4"]
+
+[project]
+authors = [{ name = "Zhi-Jie Cao", email = "caozj@mail.cbi.pku.edu.cn"  }]
+classifiers = [
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Natural Language :: English",
+  "Operating System :: MacOS :: MacOS X",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+dependencies = [
+  "numpy",
+  "pandas",
+  "scikit-learn",
+]
+description = "Project management workshop demo"
+keywords = [
+  "bioinformatics",
+]
+license = { file = "LICENSE"  }
+name = "mypackage"
+readme = "README.md"
+requires-python = ">=3.9"
+version = "0.1.0"
+
+[project.optional-dependencies]
+doc = ["sphinx"]
+test = ["pytest", "pytest-cov"]
+
+[project.urls]
+Github = "https://github.com/gao-lab/ProjectManagementWorkshop"
+
+[project.scripts]
+mypackage = "mypackage.main:main"
+
+[tool.flit.sdist]
+exclude = [".*", "c*", "d*", "e*", "t*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["mypackage"]
+
+[tool.coverage.report]
+show_missing = true

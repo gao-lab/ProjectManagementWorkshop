@@ -1,0 +1,6 @@
+/conda/
+/dist/
+__pycache__/
+.coverage
+*.pyc
+*.csv

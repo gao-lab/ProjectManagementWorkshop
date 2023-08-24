@@ -1,0 +1,6 @@
+dataset:
+  - iris
+  - mtcars
+method:
+  - mypackage
+  - random_pred

@@ -1,0 +1,91 @@
+configfile: "config/config.yaml"
+
+rule all:
+    input:
+        "results/summary.pdf"
+
+rule plot:
+    input:
+        "results/summary.csv",
+    output:
+        "results/summary.pdf",
+    script:
+        "scripts/plot.py"
+
+rule summarize:
+    input:
+        expand(
+            "results/{dataset}/{method}/metrics.yaml",
+            dataset=config["dataset"],
+            method=config["method"],
+        ),
+    output:
+        "results/summary.csv",
+    script:
+        "scripts/summarize.py"
+
+rule compute_metrics:
+    input:
+        true="results/{dataset}/test_y.csv",
+        pred="results/{dataset}/{method}/test_y.csv",
+    output:
+        "results/{dataset}/{method}/metrics.yaml",
+    log:
+        "results/{dataset}/{method}/compute_metrics.log",
+    shell:
+        "python scripts/compute_metrics.py "
+        "--true {input.true} "
+        "--pred {input.pred} "
+        "--output {output} "
+        "&> {log}"
+
+rule random_pred:
+    input:
+        "results/{dataset}/train_x.csv",
+    output:
+        "results/{dataset}/random_pred/test_y.csv",
+    log:
+        "results/{dataset}/random_pred/run.log",
+    shell:
+        "python scripts/random_pred.py "
+        "-i {input} "
+        "-o {output} "
+        "&> {log}"
+
+rule mypackage:
+    input:
+        train_x="results/{dataset}/train_x.csv",
+        train_y="results/{dataset}/train_y.csv",
+        test_x="results/{dataset}/test_x.csv",
+    output:
+        "results/{dataset}/mypackage/test_y.csv",
+    log:
+        "results/{dataset}/mypackage/run.log",
+    shell:
+        "mypackage "
+        "--train-x {input.train_x} "
+        "--train-y {input.train_y} "
+        "--test-x {input.test_x} "
+        "--test-y {output} "
+        "&> {log}"
+
+rule split_train_test:
+    input:
+        x="../data/processed/{dataset}/x.csv",
+        y="../data/processed/{dataset}/y.csv",
+    output:
+        train_x="results/{dataset}/train_x.csv",
+        train_y="results/{dataset}/train_y.csv",
+        test_x="results/{dataset}/test_x.csv",
+        test_y="results/{dataset}/test_y.csv",
+    log:
+        "results/{dataset}/split_train_test.log",
+    shell:
+        "python scripts/split_train_test.py "
+        "--input-x {input.x} "
+        "--input-y {input.y} "
+        "--output-train-x {output.train_x} "
+        "--output-train-y {output.train_y} "
+        "--output-test-x {output.test_x} "
+        "--output-test-y {output.test_y} "
+        "&> {log}"
