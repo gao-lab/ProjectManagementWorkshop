@@ -1,4 +1,7 @@
 /conda/
+/evaluation/results/
+/docs/_build/
+/docs/api/
 /dist/
 __pycache__/
 .ipynb_checkpoints/

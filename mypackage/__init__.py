@@ -10,4 +10,4 @@ except ModuleNotFoundError:
 from .model import fit, predict
 
 name = "mypackage"
-version = version(name)
+__version__ = version(name)

@@ -24,3 +24,6 @@ jobs:
     - name: Test with pytest
       run: |
         pytest --cov
+    - name: Try building docs
+      run: |
+        sphinx-build -b html docs docs/_build

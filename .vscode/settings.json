@@ -7,7 +7,8 @@
         "**/.ipynb_checkpoints/**": true,
         "**/.pytest_cache/**": true,
         "**/.snakemake/**": true,
-        "**/.coverage*": true
+        "**/.coverage*": true,
+        "**/*.pyc": true
     },
     "files.exclude": {
         "**/conda/**": true,
@@ -15,7 +16,8 @@
         "**/.ipynb_checkpoints/**": true,
         "**/.pytest_cache/**": true,
         "**/.snakemake/**": true,
-        "**/.coverage*": true
+        "**/.coverage*": true,
+        "**/*.pyc": true
     },
     "editor.formatOnSave": true,
     "python.defaultInterpreterPath": "./conda/bin/python",
@@ -30,5 +32,6 @@
         "editor.codeActionsOnSave": {
             "source.organizeImports": true
         }
-    }
+    },
+    "esbonio.sphinx.confDir": ""
 }

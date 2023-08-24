@@ -61,6 +61,18 @@ Use the `pyproject.toml` file to instruct the build and install process.
   or this [github action](https://github.com/pypa/gh-action-pypi-publish).
 
 
+## Run unit tests
+
+```sh
+pytest --cov
+```
+
+## Build documentation
+
+```sh
+sphinx-build -b html docs docs/_build
+```
+
 ## Data preparation
 
 Go to the `data/download` directory, download each dataset as described in their
