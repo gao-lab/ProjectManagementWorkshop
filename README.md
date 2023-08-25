@@ -31,10 +31,15 @@ mamba env export -p ./conda --no-build > conda.yaml
 >
 > We may also choose to remove the `name:` and `prefix:` lines from the exported
 > file to redact the trace of absolute paths, as well as to remove our
-> "mypackage" entry which should be installed as a development version:
+> "mypackage" entry which should be installed as a development version. Here
+> I've also ignored os-specific entries to support multiple os, but that's
+> unnecessary if you only aim for a single os like linux:
 >
-> `mamba env export -p ./conda --no-build | grep -Ev '^name|^prefix|mypackage' >
-> conda.yaml`
+> ```sh
+> mamba env export -p ./conda --no-build | grep -Ev '^name|^prefix|mypackage' |
+> grep -Ev 'linux|lib|keyutils|openmp|sed|osx|pyobjc|clang|llvm|compiler-rt' >
+> conda.yaml
+> ```
 
 ### Clone the environment on another machine
 
