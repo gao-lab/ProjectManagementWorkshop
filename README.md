@@ -37,7 +37,7 @@ mamba env export -p ./conda --no-build > conda.yaml
 >
 > ```sh
 > mamba env export -p ./conda --no-build | grep -Ev '^name|^prefix|mypackage' |
-> grep -Ev 'linux|lib|keyutils|openmp|sed|osx|pyobjc|clang|llvm|compiler-rt' >
+> grep -Ev 'linux|lib[a-zA-Z]+|keyutils|openmp|sed|osx|pyobjc|clang|llvm|compiler-rt' >
 > conda.yaml
 > ```
 
